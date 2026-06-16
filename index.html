@@ -1,556 +1,910 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  
-  <title>Med — Backend &amp; Systems Engineer</title>
-  <meta name="description" content="Systems-focused Backend Engineer and SaaS Founder. Architecting and scaling multi-tenant platforms, transactional outbox relays, and high-throughput pipelines.">
-  
-  <!-- Open Graph / SEO -->
-  <meta property="og:type" content="website">
-  <meta property="og:title" content="Med — Backend &amp; Systems Engineer">
-  <meta property="og:description" content="Architecting and scaling multi-tenant platforms, transactional outbox relays, and high-throughput pipelines.">
-  <meta property="og:url" content="https://med2004x.github.io/">
-  
-  <!-- Fonts -->
-  <link rel="preconnect" href="https://fonts.googleapis.com">
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=JetBrains+Mono:wght@400;500;600&display=swap" rel="stylesheet">
-  
-  <!-- Stylesheets -->
-  <link rel="stylesheet" href="style.css">
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Mohamed Elhammi — Backend & Systems Engineer</title>
+<meta name="description" content="Backend and systems engineer. Distributed writes, multi-tenant isolation, event-driven pipelines.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Syne:wght@600;700;800&family=JetBrains+Mono:wght@400;500&family=DM+Sans:ital,wght@0,400;0,500;1,400&display=swap" rel="stylesheet">
+<style>
+:root{
+  --bg:#04040a;
+  --s1:rgba(255,255,255,.025);
+  --s2:rgba(255,255,255,.05);
+  --bdr:rgba(255,255,255,.07);
+  --bdr-hi:rgba(255,255,255,.13);
+  --cy:#22d3ee;--cy-g:rgba(34,211,238,.12);
+  --vi:#a78bfa;--vi-g:rgba(167,139,250,.12);
+  --em:#34d399;--em-g:rgba(52,211,153,.12);
+  --am:#fbbf24;--am-g:rgba(251,191,36,.12);
+  --or:#fb923c;--or-g:rgba(251,146,60,.12);
+  --rs:#f87171;
+  --tx:#f1f5f9;--tx-d:#94a3b8;--tx-f:#475569;
+  --fd:'Syne',sans-serif;
+  --fb:'DM Sans',sans-serif;
+  --fm:'JetBrains Mono',monospace;
+  --r:10px;--mw:1160px;--nh:68px;
+}
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+html{scroll-behavior:smooth}
+body{background:var(--bg);color:var(--tx);font-family:var(--fb);-webkit-font-smoothing:antialiased;line-height:1.65;overflow-x:hidden}
+::selection{background:rgba(34,211,238,.22)}
+a{color:inherit;text-decoration:none}
+code{font-family:var(--fm);font-size:.82em;color:var(--cy);background:rgba(34,211,238,.08);padding:1px 5px;border-radius:3px}
+
+.w{max-width:var(--mw);margin:0 auto;padding:0 28px}
+section{padding:120px 0;border-bottom:1px solid var(--bdr);position:relative}
+
+/* NAV */
+.nav{position:fixed;top:0;left:0;right:0;z-index:99;height:var(--nh);background:rgba(4,4,10,.85);backdrop-filter:blur(20px);border-bottom:1px solid var(--bdr)}
+.nav-in{max-width:var(--mw);margin:0 auto;padding:0 28px;height:100%;display:flex;align-items:center;justify-content:space-between}
+.nav-logo{font-family:var(--fm);font-size:.95rem;font-weight:500;display:flex;align-items:center;gap:9px}
+.ndot{width:7px;height:7px;border-radius:50%;background:var(--cy);box-shadow:0 0 10px var(--cy);animation:ndp 2.2s ease-in-out infinite}
+@keyframes ndp{0%,100%{opacity:1;transform:scale(1)}50%{opacity:.4;transform:scale(.78)}}
+.nav-links{display:flex;gap:32px;list-style:none}
+.nav-links a{font-size:.8rem;color:var(--tx-d);transition:color .18s}
+.nav-links a:hover{color:var(--tx)}
+.nav-badge{font-family:var(--fm);font-size:.68rem;color:var(--em);border:1px solid rgba(52,211,153,.28);padding:5px 13px;border-radius:99px;letter-spacing:.02em}
+
+/* HERO */
+.hero{min-height:100vh;display:flex;align-items:center;padding-top:var(--nh);position:relative;overflow:hidden}
+.hero::before{content:'';position:absolute;inset:0;background-image:radial-gradient(rgba(255,255,255,.032) 1px,transparent 1px);background-size:38px 38px;pointer-events:none}
+.hero::after{content:'';position:absolute;bottom:0;left:0;right:0;height:200px;background:linear-gradient(transparent,var(--bg));pointer-events:none}
+#hc{position:absolute;inset:0;width:100%;height:100%;opacity:.55;pointer-events:none}
+.hero-c{position:relative;z-index:2;padding:80px 0 60px}
+.hero-lbl{font-family:var(--fm);font-size:.68rem;color:var(--cy);letter-spacing:.2em;text-transform:uppercase;margin-bottom:28px;display:flex;align-items:center;gap:14px}
+.hero-lbl::before{content:'';display:block;width:32px;height:1px;background:var(--cy)}
+h1.hero-name{font-family:var(--fd);font-size:clamp(4.5rem,11vw,9.5rem);font-weight:800;line-height:.92;letter-spacing:-.045em;margin-bottom:28px}
+.hero-sub{font-family:var(--fd);font-size:clamp(1.2rem,2.5vw,1.9rem);font-weight:600;color:var(--tx-d);max-width:620px;line-height:1.3;margin-bottom:18px}
+.hero-desc{font-size:1rem;color:var(--tx-d);max-width:480px;margin-bottom:60px;line-height:1.7}
+.hero-stack{display:flex;flex-wrap:wrap;gap:8px;padding-top:40px;border-top:1px solid var(--bdr)}
+.pill{font-family:var(--fm);font-size:.68rem;font-weight:500;padding:5px 12px;border-radius:6px;border:1px solid var(--bdr-hi);color:var(--tx-d);background:var(--s1)}
+.p-cy{border-color:rgba(34,211,238,.28);color:var(--cy);background:var(--cy-g)}
+.p-em{border-color:rgba(52,211,153,.28);color:var(--em);background:var(--em-g)}
+.p-am{border-color:rgba(251,191,36,.28);color:var(--am);background:var(--am-g)}
+.p-vi{border-color:rgba(167,139,250,.28);color:var(--vi);background:var(--vi-g)}
+
+/* SECTION LABEL */
+.slbl{font-family:var(--fm);font-size:.66rem;text-transform:uppercase;letter-spacing:.22em;color:var(--tx-f);margin-bottom:56px;display:flex;align-items:center;gap:14px}
+.slbl::after{content:'';flex:0 0 40px;height:1px;background:var(--bdr-hi)}
+
+/* ABOUT */
+.about-g{display:grid;grid-template-columns:1fr 1.15fr;gap:72px;align-items:start}
+.about-lead{font-family:var(--fd);font-size:1.7rem;font-weight:700;line-height:1.32;letter-spacing:-.022em;color:var(--tx)}
+.about-r{display:flex;flex-direction:column;gap:20px}
+.about-r p{font-size:1rem;color:var(--tx-d);line-height:1.72}
+.stats{display:grid;grid-template-columns:repeat(4,1fr);gap:1px;margin-top:56px;border:1px solid var(--bdr);border-radius:var(--r);overflow:hidden}
+.stat{padding:24px 20px;background:var(--s1);display:flex;flex-direction:column;gap:6px}
+.stat-n{font-family:var(--fd);font-size:2.4rem;font-weight:800;line-height:1;letter-spacing:-.03em}
+.stat-n span{color:var(--cy)}
+.stat-l{font-family:var(--fm);font-size:.62rem;color:var(--tx-f);text-transform:uppercase;letter-spacing:.1em}
+
+/* CASE STUDIES */
+.cs-list{display:flex;flex-direction:column;gap:72px}
+.cs-card{border:1px solid var(--bdr);border-radius:14px;overflow:hidden;background:var(--s1);transition:border-color .3s}
+.cs-card:hover{border-color:var(--bdr-hi)}
+.cs-hd{padding:40px 44px 32px;border-bottom:1px solid var(--bdr)}
+.cs-meta{display:flex;align-items:center;justify-content:space-between;margin-bottom:16px}
+.cs-tag{font-family:var(--fm);font-size:.66rem;letter-spacing:.14em;text-transform:uppercase;color:var(--cy)}
+.cs-gh{font-family:var(--fm);font-size:.68rem;color:var(--tx-f);border-bottom:1px solid transparent;transition:color .2s,border-color .2s}
+.cs-gh:hover{color:var(--tx-d);border-color:var(--bdr-hi)}
+.cs-title{font-family:var(--fd);font-size:clamp(1.45rem,2.4vw,2rem);font-weight:700;letter-spacing:-.03em;color:var(--tx);margin-bottom:8px}
+.cs-body{display:grid;grid-template-columns:1.05fr 1fr}
+.cs-text{padding:36px 44px;border-right:1px solid var(--bdr)}
+.cs-diag{padding:24px 18px;display:flex;align-items:center;justify-content:center;background:rgba(0,0,0,.25);min-height:360px}
+.cs-cols{display:grid;grid-template-columns:1fr 1fr;gap:30px;margin-bottom:28px}
+.cs-cl{font-family:var(--fm);font-size:.63rem;text-transform:uppercase;letter-spacing:.1em;color:var(--tx-f);margin-bottom:9px}
+.cs-ct{font-size:.89rem;color:var(--tx-d);line-height:1.65}
+.cs-decs{}
+.cs-di{display:flex;gap:10px;align-items:flex-start;padding:8px 0;border-bottom:1px solid var(--bdr)}
+.cs-di:last-child{border-bottom:none}
+.cs-arr{color:var(--cy);font-family:var(--fm);font-size:.7rem;flex-shrink:0;padding-top:1px;font-weight:600}
+.cs-dt{font-size:.875rem;color:var(--tx-d);line-height:1.58}
+.cs-tags{display:flex;flex-wrap:wrap;gap:8px;padding:20px 44px;border-top:1px solid var(--bdr);background:rgba(0,0,0,.18)}
+.tag{font-family:var(--fm);font-size:.63rem;font-weight:500;padding:3px 9px;border-radius:4px;background:var(--s2);border:1px solid var(--bdr);color:var(--tx-d)}
+
+/* DIAGRAM SVG */
+.dsvg{width:100%;height:auto}
+/* animated edges */
+.de{fill:none;stroke-width:1.4;stroke-dasharray:5 4;animation:fl 1.4s linear infinite}
+.de-cy{stroke:rgba(34,211,238,.35)}.de-am{stroke:rgba(251,191,36,.35)}.de-vi{stroke:rgba(167,139,250,.35)}.de-em{stroke:rgba(52,211,153,.35)}.de-or{stroke:rgba(251,146,60,.35)}.de-sl{stroke:rgba(148,163,184,.25)}
+@keyframes fl{to{stroke-dashoffset:-9}}
+/* static edges */
+.se{fill:none;stroke-width:1;stroke:rgba(255,255,255,.06)}
+/* node rects */
+.dn{stroke-width:1.3}
+.dn-cy{fill:rgba(34,211,238,.09);stroke:#22d3ee}.dn-am{fill:rgba(251,191,36,.09);stroke:#fbbf24}.dn-vi{fill:rgba(167,139,250,.09);stroke:#a78bfa}.dn-em{fill:rgba(52,211,153,.09);stroke:#34d399}.dn-sl{fill:rgba(148,163,184,.08);stroke:#94a3b8}.dn-or{fill:rgba(251,146,60,.09);stroke:#fb923c}
+/* node text */
+.dt{font-family:'JetBrains Mono',monospace;font-size:10px;font-weight:500;dominant-baseline:middle;text-anchor:middle}
+.dt-cy{fill:#22d3ee}.dt-am{fill:#fbbf24}.dt-vi{fill:#a78bfa}.dt-em{fill:#34d399}.dt-sl{fill:#94a3b8}.dt-or{fill:#fb923c}
+.ds{font-family:'JetBrains Mono',monospace;font-size:8px;fill:#475569;dominant-baseline:middle;text-anchor:middle}
+/* plane labels */
+.dpl{font-family:'JetBrains Mono',monospace;font-size:8px;fill:#334155;text-anchor:start;letter-spacing:.08em;text-transform:uppercase}
+/* plane boxes */
+.dpb{fill:none;stroke:rgba(255,255,255,.04);stroke-width:1;rx:6;stroke-dasharray:3 3}
+/* edge labels */
+.del{font-family:'JetBrains Mono',monospace;font-size:7.5px;fill:#334155;text-anchor:middle}
+/* state badge */
+.dsb{font-family:'JetBrains Mono',monospace;font-size:7.5px;dominant-baseline:middle;text-anchor:middle}
+
+/* ENGINE ROOM */
+.eng-intro{font-size:1rem;color:var(--tx-d);max-width:640px;margin-bottom:54px;line-height:1.7}
+.eng-g{display:grid;grid-template-columns:repeat(3,1fr);gap:16px}
+.ec{border:1px solid var(--bdr);border-radius:12px;padding:28px;background:var(--s1);display:flex;flex-direction:column;position:relative;overflow:hidden;transition:border-color .22s,box-shadow .22s,transform .22s}
+.ec::after{content:'';position:absolute;top:0;left:10%;right:10%;height:1px;background:transparent;transition:background .3s}
+.ec:hover{border-color:var(--bdr-hi);box-shadow:0 10px 46px rgba(0,0,0,.4);transform:translateY(-2px)}
+.ec:hover::after{background:linear-gradient(90deg,transparent,var(--cy),transparent)}
+.et{display:flex;justify-content:space-between;align-items:flex-start;margin-bottom:16px}
+.en{font-family:var(--fm);font-size:.68rem;color:var(--tx-f);font-weight:500}
+.egl{font-family:var(--fm);font-size:.66rem;color:var(--tx-f);transition:color .18s}
+.egl:hover{color:var(--cy)}
+.ename{font-family:var(--fd);font-size:1.08rem;font-weight:700;color:var(--tx);letter-spacing:-.02em;margin-bottom:12px;line-height:1.28}
+.ebody{flex:1;display:flex;flex-direction:column;gap:9px;margin-bottom:20px}
+.ebody p{font-size:.855rem;color:var(--tx-d);line-height:1.64}
+.edecs{margin-top:6px;display:flex;flex-direction:column;gap:6px}
+.edi{display:flex;gap:8px;align-items:flex-start}
+.edi-arr{color:var(--cy);font-family:var(--fm);font-size:.66rem;flex-shrink:0;padding-top:1px}
+.edi-t{font-size:.815rem;color:var(--tx-d);line-height:1.55}
+.efoot{display:flex;flex-wrap:wrap;gap:6px;padding-top:16px;border-top:1px solid var(--bdr);margin-top:auto}
+.ct{font-family:var(--fm);font-size:.61rem;font-weight:500;padding:2px 8px;border-radius:4px;border:1px solid var(--bdr);color:var(--tx-f);background:rgba(0,0,0,.2)}
+
+/* LEDGER */
+.tw{border:1px solid var(--bdr);border-radius:12px;overflow:hidden}
+table{width:100%;border-collapse:collapse;font-size:.86rem}
+thead th{background:rgba(0,0,0,.32);font-family:var(--fm);font-size:.62rem;text-transform:uppercase;letter-spacing:.1em;color:var(--tx-f);padding:13px 20px;text-align:left;border-bottom:1px solid var(--bdr)}
+tbody td{padding:14px 20px;border-bottom:1px solid var(--bdr);color:var(--tx-d);vertical-align:top}
+tbody tr:last-child td{border-bottom:none}
+tbody tr:hover td{background:rgba(255,255,255,.012)}
+tbody td:first-child{color:var(--tx);font-weight:500}
+.tl{font-family:var(--fm);font-size:.68rem;color:var(--cy)}
+.tl:hover{text-decoration:underline}
+
+/* PHILOSOPHY */
+.phi-g{display:grid;grid-template-columns:repeat(4,1fr);gap:1px;border:1px solid var(--bdr);border-radius:12px;overflow:hidden}
+.pi{padding:32px 26px;background:var(--s1);display:flex;flex-direction:column;gap:12px}
+.pn{font-family:var(--fm);font-size:.66rem;color:var(--tx-f)}
+.pt{font-family:var(--fd);font-size:1.05rem;font-weight:700;color:var(--tx);letter-spacing:-.01em}
+.pp{font-size:.865rem;color:var(--tx-d);line-height:1.62}
+
+/* CONTACT */
+.ct-in{display:grid;grid-template-columns:1fr 1fr;gap:80px;align-items:start}
+.ct-lead{font-family:var(--fd);font-size:clamp(1.9rem,3.8vw,2.9rem);font-weight:700;letter-spacing:-.03em;line-height:1.2;color:var(--tx);margin-bottom:16px}
+.ct-sub{font-size:.975rem;color:var(--tx-d);line-height:1.7;max-width:420px}
+.ct-links{display:flex;flex-direction:column;gap:24px}
+.cm{display:flex;flex-direction:column;gap:5px}
+.cml{font-family:var(--fm);font-size:.62rem;text-transform:uppercase;letter-spacing:.12em;color:var(--tx-f)}
+.cmv{font-size:1.15rem;font-weight:500;color:var(--tx);transition:color .18s}
+.cmv:hover{color:var(--cy)}
+.cmv.mono{font-family:var(--fm);font-size:.95rem;user-select:all}
+
+/* FOOTER */
+footer{padding:40px 0}
+.fi{max-width:var(--mw);margin:0 auto;padding:0 28px;display:flex;justify-content:space-between;align-items:center}
+.fl{font-family:var(--fm);font-size:.78rem;color:var(--tx-f)}
+
+/* REVEAL */
+.rv{opacity:0;transform:translateY(20px);transition:opacity .6s cubic-bezier(.16,1,.3,1),transform .6s cubic-bezier(.16,1,.3,1)}
+.rv.in{opacity:1;transform:none}
+.rv.d1{transition-delay:.1s}.rv.d2{transition-delay:.2s}.rv.d3{transition-delay:.3s}
+
+/* RESPONSIVE */
+@media(max-width:980px){
+  .about-g{grid-template-columns:1fr;gap:38px}
+  .stats{grid-template-columns:repeat(2,1fr)}
+  .cs-body{grid-template-columns:1fr}
+  .cs-text{border-right:none;border-bottom:1px solid var(--bdr)}
+  .cs-diag{min-height:280px}
+  .eng-g{grid-template-columns:repeat(2,1fr)}
+  .phi-g{grid-template-columns:repeat(2,1fr)}
+  .ct-in{grid-template-columns:1fr;gap:44px}
+  .nav-links{display:none}
+}
+@media(max-width:580px){
+  .eng-g{grid-template-columns:1fr}
+  .phi-g{grid-template-columns:1fr}
+  .cs-cols{grid-template-columns:1fr;gap:22px}
+}
+</style>
 </head>
 <body>
 
-  <!-- Navigation -->
-  <header class="header">
-    <div class="header-container">
-      <a href="#" class="logo" aria-label="Med Homepage">med2004x</a>
-      <nav class="nav" aria-label="Main Navigation">
-        <ul class="nav-list">
-          <li><a href="#about" class="nav-link">About</a></li>
-          <li><a href="#case-studies" class="nav-link">Case Studies</a></li>
-          <li><a href="#engine-room" class="nav-link">Engine Room</a></li>
-          <li><a href="#ledger" class="nav-link">Technical Ledger</a></li>
-          <li><a href="#philosophy" class="nav-link">Philosophy</a></li>
-          <li><a href="#contact" class="nav-link">Contact</a></li>
-        </ul>
-      </nav>
-      <div class="status-badge" aria-live="polite">
-        <span class="status-dot"></span>
-        <span class="status-text">Available for select projects</span>
+<nav class="nav">
+  <div class="nav-in">
+    <div class="nav-logo"><div class="ndot"></div>med2004x</div>
+    <ul class="nav-links">
+      <li><a href="#about">About</a></li>
+      <li><a href="#case-studies">Case Studies</a></li>
+      <li><a href="#engine-room">Engine Room</a></li>
+      <li><a href="#ledger">Ledger</a></li>
+      <li><a href="#philosophy">Philosophy</a></li>
+      <li><a href="#contact">Contact</a></li>
+    </ul>
+    <div class="nav-badge">Available for projects</div>
+  </div>
+</nav>
+
+<!-- HERO -->
+<section class="hero" id="hero">
+  <canvas id="hc"></canvas>
+  <div class="w hero-c">
+    <div class="hero-lbl">Backend &amp; Systems Engineer</div>
+    <h1 class="hero-name">Mohamed<br>Elhammi</h1>
+    <p class="hero-sub">Distributed writes, multi-tenant isolation, event-driven pipelines.</p>
+    <p class="hero-desc">I build the infrastructure layer and run it in production. Industrial Informatics background — I think in failure modes first.</p>
+    <div class="hero-stack">
+      <span class="pill p-cy">Go</span>
+      <span class="pill p-cy">Python</span>
+      <span class="pill">Rust</span>
+      <span class="pill">C</span>
+      <span class="pill p-em">PostgreSQL</span>
+      <span class="pill p-am">Redis</span>
+      <span class="pill p-am">Kafka</span>
+      <span class="pill p-am">SQLite</span>
+      <span class="pill">Docker</span>
+      <span class="pill">Cloudflare</span>
+      <span class="pill p-vi">FastAPI</span>
+      <span class="pill p-vi">Next.js</span>
+    </div>
+  </div>
+</section>
+
+<!-- ABOUT -->
+<section id="about">
+  <div class="w">
+    <div class="slbl">About</div>
+    <div class="about-g">
+      <div>
+        <p class="about-lead rv">My background is Industrial Informatics. Before building web services, I spent years programming industrial machinery for large manufacturing plants and configuring enterprise networks.</p>
+      </div>
+      <div class="about-r">
+        <p class="rv d1">That's an unusual path into backend, and it changes how you think. In industrial systems, resource limits are physical and failure modes are non-negotiable — you don't fix it with a hotfix on Monday.</p>
+        <p class="rv d2">I currently build and run two SaaS products while taking contract backend work. I own the full stack: schema design, service architecture, VPS setup, CDN config, and monitoring. I work independently and prefer direct technical collaboration over managed hand-holding.</p>
       </div>
     </div>
-  </header>
-
-  <main>
-    <!-- Section 1: Hero -->
-    <section class="hero-section" id="hero">
-      <div class="section-container hero-container animate-fade-in">
-        <div class="hero-meta">SYSTEMS &amp; DISTRIBUTED SOFTWARE ENGINE</div>
-        <h1 class="hero-title">Med</h1>
-        <h2 class="hero-subtitle">Architecting resilient backend systems and multi-tenant SaaS infrastructure.</h2>
-        <p class="hero-description">
-          Designing, building, and operating high-availability services with strict transactional safety, high concurrency, and complete observability.
-        </p>
-        
-        <div class="hero-grid">
-          <div class="hero-grid-item">
-            <span class="grid-label">Primary Languages</span>
-            <span class="grid-value">Go / Python / Rust / C</span>
-          </div>
-          <div class="hero-grid-item">
-            <span class="grid-label">Core Infrastructure</span>
-            <span class="grid-value">PostgreSQL / Redis / SQLite / Kafka / Docker</span>
-          </div>
-          <div class="hero-grid-item">
-            <span class="grid-label">Architectural Vectors</span>
-            <span class="grid-value">Multi-tenant Isolation &amp; Event Relays</span>
-          </div>
-        </div>
-      </div>
-    </section>
-
-    <!-- Section 2: About -->
-    <section class="about-section" id="about">
-      <div class="section-container">
-        <h2 class="section-title">About</h2>
-        <div class="about-grid">
-          <div class="about-column-left">
-            <p class="lead-text">
-              I am an autonomous founder-engineer with a background bridging low-level hardware control loops and modern distributed web architectures.
-            </p>
-          </div>
-          <div class="about-column-right">
-            <p>
-              My engineering foundations lie in <strong>Industrial Informatics and Programming</strong>. Before building distributed SaaS platforms, I spent years programming industrial machinery for large manufacturing plants and configuring enterprise security network structures. This instilled a hardware-level appreciation for resource limits, latency budgets, and operational failure modes.
-            </p>
-            <p>
-              Today, I build software engines for web-scale platforms. I design systems with an emphasis on strict transactional isolation, decoupled writes, and high concurrency. I work best with independent execution, taking full-lifecycle ownership from database schema design down to VPS virtualization, CDN edge caching, and service telemetry.
-            </p>
-          </div>
-        </div>
-      </div>
-    </section>
-
-    <!-- Section 3: Core Architectural Case Studies -->
-    <section class="case-studies-section" id="case-studies">
-      <div class="section-container">
-        <h2 class="section-title">Core Case Studies</h2>
-        
-        <div class="case-studies-container">
-          <!-- Case Study 1: Mahall -->
-          <article class="case-study-card">
-            <div class="case-study-meta">
-              <span class="case-tag">SaaS Core Infrastructure</span>
-              <a href="https://github.com/med2004x/mahall-case-study" class="git-link" target="_blank" rel="noopener noreferrer">
-                github.com/med2004x/mahall-case-study
-              </a>
-            </div>
-            
-            <header class="case-study-header">
-              <h3 class="case-study-title">Mahall — Global Multi-Tenant E-commerce Infrastructure</h3>
-              <p class="case-study-tagline">Treating multi-vendor marketplace coordination as a distributed systems challenge rather than a monolithic storefront application.</p>
-            </header>
-            
-            <div class="case-study-grid">
-              <div class="case-study-column">
-                <h4>The Operational Problem</h4>
-                <p>Standard e-commerce checkouts force catalog lookups, inventory reservation, and payment captures to run as a single synchronous web transaction. As seller catalogs scale, slow payment gateways and concurrent inventory locks result in high checkout failure rates, database deadlocks, and split-shipment calculation errors.</p>
-              </div>
-              
-              <div class="case-study-column">
-                <h4>The Architectural Solution</h4>
-                <p>Mahall decouples order intake from processing. The backend accepts orders immediately at the edge and handles inventory reservation, payout allocation, and fulfillment asynchronously through an event-driven order orchestrator. Catalog updates are split from checkout storage, preventing ingestion spikes from degrading purchase funnels.</p>
-              </div>
-              
-              <div class="case-study-column">
-                <h4>Key Technical Decisions</h4>
-                <ul class="bullet-list">
-                  <li><strong>Decoupled Ingestion:</strong> Built distinct Catalog and Inventory microservices to prevent heavy writes from merchants from impacting checkouts.</li>
-                  <li><strong>Workflow Orchestrator:</strong> Implemented a distributed order coordinator running reservation checks and payment intents asynchronously.</li>
-                  <li><strong>Ledger-First Payouts:</strong> Designed seller payouts around a double-entry ledger database pattern, releasing funds only after third-party fulfillment endpoints issue delivery proofs.</li>
-                </ul>
-              </div>
-
-              <div class="case-study-column">
-                <h4>Technology &amp; Topology</h4>
-                <div class="tag-group">
-                  <span class="tech-tag">Go</span>
-                  <span class="tech-tag">PostgreSQL</span>
-                  <span class="tech-tag">Redis</span>
-                  <span class="tech-tag">Next.js</span>
-                  <span class="tech-tag">Docker</span>
-                  <span class="tech-tag">Cloudflare</span>
-                  <span class="tech-tag">R2 Storage</span>
-                </div>
-              </div>
-            </div>
-          </article>
-
-          <!-- Case Study 2: Lead Source -->
-          <article class="case-study-card">
-            <div class="case-study-meta">
-              <span class="case-tag">Data Pipelines</span>
-              <a href="https://github.com/med2004x/lead-source-architecture-case-study" class="git-link" target="_blank" rel="noopener noreferrer">
-                github.com/med2004x/lead-source-architecture-case-study
-              </a>
-            </div>
-            
-            <header class="case-study-header">
-              <h3 class="case-study-title">Lead Source — Distributed Ingestion &amp; Automation Control Plane</h3>
-              <p class="case-study-tagline">A multi-surface data collection and normalization pipeline separating web APIs from resource-heavy browser clusters.</p>
-            </header>
-            
-            <div class="case-study-grid">
-              <div class="case-study-column">
-                <h4>The Operational Problem</h4>
-                <p>Data enrichment workflows often rely on slow third-party REST APIs and complex browser automation (Playwright). Running these operations inside the primary HTTP thread pools causes server socket exhaustion, memory spikes, and severe request degradation for dashboard operators.</p>
-              </div>
-              
-              <div class="case-study-column">
-                <h4>The Architectural Solution</h4>
-                <p>Lead Source separates concerns into a Python API control plane, an asynchronous background worker pool, and a dedicated browser automation cluster. Incoming jobs are written to a Redis queue instantly, allowing workers to execute, normalize, and enrich data out-of-process.</p>
-              </div>
-              
-              <div class="case-study-column">
-                <h4>Key Technical Decisions</h4>
-                <ul class="bullet-list">
-                  <li><strong>Unified Adapter Pattern:</strong> Mapped static API sources, external HTTP scrapers, and dynamic browser automation onto a single backend interface contract.</li>
-                  <li><strong>Playwright Isolation:</strong> Deployed dynamic browser-assisted workers into containerized, resource-constrained sub-networks to prevent memory leaks from destabilizing the main application.</li>
-                  <li><strong>Telemetry Loops:</strong> Configured Prometheus metrics to monitor API requests, task completion latencies, and queue depth.</li>
-                </ul>
-              </div>
-
-              <div class="case-study-column">
-                <h4>Technology &amp; Topology</h4>
-                <div class="tag-group">
-                  <span class="tech-tag">Python</span>
-                  <span class="tech-tag">Playwright</span>
-                  <span class="tech-tag">PostgreSQL</span>
-                  <span class="tech-tag">Redis</span>
-                  <span class="tech-tag">Docker Compose</span>
-                  <span class="tech-tag">Prometheus</span>
-                  <span class="tech-tag">Grafana</span>
-                </div>
-              </div>
-            </div>
-          </article>
-        </div>
-      </div>
-    </section>
-
-    <!-- Section 4: The Engine Room -->
-    <section class="engine-room-section" id="engine-room">
-      <div class="section-container">
-        <h2 class="section-title">The Engine Room: Distributed Components</h2>
-        <p class="section-subtitle-description">
-          A catalog of custom-built backend engines, infrastructure adapters, and transactional tools. Each is built from scratch to solve specific latency, consistency, or scaling bottlenecks.
-        </p>
-        
-        <div class="components-grid">
-          <!-- Component 1: Transactional Outbox -->
-          <article class="component-card">
-            <header class="component-card-header">
-              <span class="component-number">01</span>
-              <h3 class="component-name">Transactional Outbox Relay</h3>
-              <a href="https://github.com/med2004x/transactional-outbox" class="component-git-link" target="_blank" rel="noopener noreferrer">transactional-outbox</a>
-            </header>
-            <div class="component-body">
-              <p class="component-problem"><strong>Problem:</strong> Committing business records (e.g. orders) and publishing events to external brokers in separate operations eventually causes failures where one step fails, leaving the system in an inconsistent state.</p>
-              <p class="component-solution"><strong>Solution:</strong> A Go library that writes domain models and integration events in the same SQLite transaction. A background dispatcher loop reads pending records and relays them to transport brokers with configurable exponential backoff and a dead-letter path.</p>
-              <p class="component-detail"><strong>Engine Detail:</strong> Rather than hiding failures in application logs, delivery events are committed directly to a queryable delivery ledger, making retry attempts auditability a first-class feature.</p>
-            </div>
-            <footer class="component-footer">
-              <div class="tag-group">
-                <span class="tech-tag">Go 1.24</span>
-                <span class="tech-tag">SQLite</span>
-                <span class="tech-tag">zerolog</span>
-                <span class="tech-tag">Outbox Pattern</span>
-              </div>
-            </footer>
-          </article>
-
-          <!-- Component 2: Custom Domain Automation -->
-          <article class="component-card">
-            <header class="component-card-header">
-              <span class="component-number">02</span>
-              <h3 class="component-name">Custom Domain Validation Engine</h3>
-              <a href="https://github.com/med2004x/custom-domain-automation" class="component-git-link" target="_blank" rel="noopener noreferrer">custom-domain-automation</a>
-            </header>
-            <div class="component-body">
-              <p class="component-problem"><strong>Problem:</strong> Standard custom domain setups in multi-tenant systems fail during onboarding handoffs because of unvalidated DNS records, causing SSL errors and manual troubleshooting.</p>
-              <p class="component-solution"><strong>Solution:</strong> A stateful automation service written in Go. It registers incoming custom hostnames, generates DNS TXT validation tokens, and runs an asynchronous polling routine to check record completion status.</p>
-              <p class="component-detail"><strong>Engine Detail:</strong> Features a fully decoupled DNS provider interface, isolating the status transition workflow from specific domain registrar configurations.</p>
-            </div>
-            <footer class="component-footer">
-              <div class="tag-group">
-                <span class="tech-tag">Go 1.25</span>
-                <span class="tech-tag">Docker Compose</span>
-                <span class="tech-tag">DNS Provider Interface</span>
-              </div>
-            </footer>
-          </article>
-
-          <!-- Component 3: Multitenant Engine -->
-          <article class="component-card">
-            <header class="component-card-header">
-              <span class="component-number">03</span>
-              <h3 class="component-name">Dynamic PostgreSQL Multitenant Engine</h3>
-              <a href="https://github.com/med2004x/multitenant-engine" class="component-git-link" target="_blank" rel="noopener noreferrer">multitenant-engine</a>
-            </header>
-            <div class="component-body">
-              <p class="component-problem"><strong>Problem:</strong> Shared-table data isolation risks information leakage and complicates customer-level data backups, while deploying separate database servers increases base infrastructure overhead.</p>
-              <p class="component-solution"><strong>Solution:</strong> A FastAPI backend that isolates tenants using dedicated PostgreSQL schemas. Tenant metadata is stored in a shared control registry under `public`, while tenant-owned business data is routed to `tenant_&lt;slug&gt;` tables.</p>
-              <p class="component-detail"><strong>Engine Detail:</strong> Schema provisioning is handled asynchronously. Workers fetch bootstrap instructions using PostgreSQL `FOR UPDATE SKIP LOCKED` locks to allow horizontal scaling.</p>
-            </div>
-            <footer class="component-footer">
-              <div class="tag-group">
-                <span class="tech-tag">Python 3.12</span>
-                <span class="tech-tag">FastAPI</span>
-                <span class="tech-tag">asyncpg</span>
-                <span class="tech-tag">PostgreSQL 16</span>
-              </div>
-            </footer>
-          </article>
-
-          <!-- Component 4: Background Task Processor -->
-          <article class="component-card">
-            <header class="component-card-header">
-              <span class="component-number">04</span>
-              <h3 class="component-name">Redis-Backed Task Processor</h3>
-              <a href="https://github.com/med2004x/background-task-processor" class="component-git-link" target="_blank" rel="noopener noreferrer">background-task-processor</a>
-            </header>
-            <div class="component-body">
-              <p class="component-problem"><strong>Problem:</strong> Full Celery integrations are too heavy for lightweight microservice architectures, yet built-in queues lack retry scheduling, backoff logic, and error persistence.</p>
-              <p class="component-solution"><strong>Solution:</strong> A FastAPI-linked task processor that uses Redis hashes for status storage, lists for pending jobs, and sorted sets for scheduled retries. It executes task callbacks out-of-process.</p>
-              <p class="component-detail"><strong>Engine Detail:</strong> Failed tasks write traceback summaries and attempt histories directly into the Redis hash metadata, preventing status loss.</p>
-            </div>
-            <footer class="component-footer">
-              <div class="tag-group">
-                <span class="tech-tag">Python 3.12</span>
-                <span class="tech-tag">FastAPI</span>
-                <span class="tech-tag">Redis 7</span>
-                <span class="tech-tag">redis-py</span>
-              </div>
-            </footer>
-          </article>
-
-          <!-- Component 5: Go Full-Text Search -->
-          <article class="component-card">
-            <header class="component-card-header">
-              <span class="component-number">05</span>
-              <h3 class="component-name">Worker-Backed Full-Text Search Index</h3>
-              <a href="https://github.com/med2004x/go-fulltext-search" class="component-git-link" target="_blank" rel="noopener noreferrer">go-fulltext-search</a>
-            </header>
-            <div class="component-body">
-              <p class="component-problem"><strong>Problem:</strong> Standard database `LIKE` queries lack term stemming and relevance scoring, while deploying a full Elasticsearch cluster consumes excessive RAM and CPU resources.</p>
-              <p class="component-solution"><strong>Solution:</strong> A self-contained document search engine written in Go. It accepts document records over HTTP, processes index tokenization through a channel-based worker queue, and serves ranked searches.</p>
-              <p class="component-detail"><strong>Engine Detail:</strong> Ingestion calls are blocked until the inverted index is successfully updated, guaranteeing search availability matches write confirmation.</p>
-            </div>
-            <footer class="component-footer">
-              <div class="tag-group">
-                <span class="tech-tag">Go 1.24</span>
-                <span class="tech-tag">Custom Inverted Index</span>
-                <span class="tech-tag">Docker Compose</span>
-              </div>
-            </footer>
-          </article>
-
-          <!-- Component 6: Kafka Event Pipeline -->
-          <article class="component-card">
-            <header class="component-card-header">
-              <span class="component-number">06</span>
-              <h3 class="component-name">Resilient Kafka Ingestion Pipeline</h3>
-              <a href="https://github.com/med2004x/kafka-event-pipeline" class="component-git-link" target="_blank" rel="noopener noreferrer">kafka-event-pipeline</a>
-            </header>
-            <div class="component-body">
-              <p class="component-problem"><strong>Problem:</strong> Consumer process exceptions can lock up message queues or silently drop event payloads, leading to downstream state desynchronization.</p>
-              <p class="component-solution"><strong>Solution:</strong> A Python event ingress service built around the `confluent-kafka` client. It routes events across raw, retry, and dead-letter queues, handling bad payloads safely.</p>
-              <p class="component-detail"><strong>Engine Detail:</strong> Backoff delay values are encoded directly in the event wrapper, turning the message broker history into the absolute state authority for retry loops.</p>
-            </div>
-            <footer class="component-footer">
-              <div class="tag-group">
-                <span class="tech-tag">Python 3.12</span>
-                <span class="tech-tag">FastAPI</span>
-                <span class="tech-tag">confluent-kafka</span>
-                <span class="tech-tag">Dead Letter Queues</span>
-              </div>
-            </footer>
-          </article>
-
-          <!-- Component 7: Multisurface API Gateway -->
-          <article class="component-card">
-            <header class="component-card-header">
-              <span class="component-number">07</span>
-              <h3 class="component-name">Declarative Multisurface API Gateway</h3>
-              <a href="https://github.com/med2004x/multisurface-api-gateway" class="component-git-link" target="_blank" rel="noopener noreferrer">multisurface-api-gateway</a>
-            </header>
-            <div class="component-body">
-              <p class="component-problem"><strong>Problem:</strong> Duplicating authentication, route-throttling, and health checking logic inside multiple service instances causes integration drift and security gaps.</p>
-              <p class="component-solution"><strong>Solution:</strong> A centralized reverse proxy written in Go. It intercepts incoming traffic, parses API key authorizations, and enforces route-level rate limits based on client identity.</p>
-              <p class="component-detail"><strong>Engine Detail:</strong> Active background health checks monitor downstream microservice endpoints, updating routing paths without server reloads.</p>
-            </div>
-            <footer class="component-footer">
-              <div class="tag-group">
-                <span class="tech-tag">Go 1.25</span>
-                <span class="tech-tag">YAML Router</span>
-                <span class="tech-tag">Reverse Proxy</span>
-                <span class="tech-tag">Alpine</span>
-              </div>
-            </footer>
-          </article>
-
-          <!-- Component 8: Observability Stack -->
-          <article class="component-card">
-            <header class="component-card-header">
-              <span class="component-number">08</span>
-              <h3 class="component-name">Go Metrics &amp; Telemetry Adapter</h3>
-              <a href="https://github.com/med2004x/observability-stack" class="component-git-link" target="_blank" rel="noopener noreferrer">observability-stack</a>
-            </header>
-            <div class="component-body">
-              <p class="component-problem"><strong>Problem:</strong> Adding instrumentation as an afterthought results in tight coupling between business logic handlers and telemetry library clients.</p>
-              <p class="component-solution"><strong>Solution:</strong> A Go microservice pre-instrumented with Prometheus RED-style metrics and OpenTelemetry trace spans, wrapped in a clean local development compose stack.</p>
-              <p class="component-detail"><strong>Engine Detail:</strong> All tracing logic is decoupled using an injectable telemetry component. Features distinct endpoints for liveness (`/healthz`) and dependency readiness (`/readyz`).</p>
-            </div>
-            <footer class="component-footer">
-              <div class="tag-group">
-                <span class="tech-tag">Go 1.25</span>
-                <span class="tech-tag">Prometheus Client</span>
-                <span class="tech-tag">OpenTelemetry</span>
-              </div>
-            </footer>
-          </article>
-        </div>
-      </div>
-    </section>
-
-    <!-- Section 5: Technical Ledger Table -->
-    <section class="ledger-section" id="ledger">
-      <div class="section-container">
-        <h2 class="section-title">Technical Ledger</h2>
-        <div class="table-container">
-          <table class="ledger-table">
-            <thead>
-              <tr>
-                <th>System / Service</th>
-                <th>Core Language</th>
-                <th>Storage Tier</th>
-                <th>Key Architectural Pattern</th>
-                <th>Repository</th>
-              </tr>
-            </thead>
-            <tbody>
-              <tr>
-                <td><strong>Mahall E-Commerce</strong></td>
-                <td>Go 1.24</td>
-                <td>PostgreSQL / Redis / R2</td>
-                <td>Decoupled checkout write pipelines, Saga orchestrator</td>
-                <td><a href="https://github.com/med2004x/mahall-case-study" class="table-link" target="_blank" rel="noopener noreferrer">View code ↗</a></td>
-              </tr>
-              <tr>
-                <td><strong>Lead Source Pipeline</strong></td>
-                <td>Python 3.12</td>
-                <td>PostgreSQL / Redis</td>
-                <td>Distributed worker queues, Playwright browser pool</td>
-                <td><a href="https://github.com/med2004x/lead-source-architecture-case-study" class="table-link" target="_blank" rel="noopener noreferrer">View code ↗</a></td>
-              </tr>
-              <tr>
-                <td><strong>Transactional Outbox</strong></td>
-                <td>Go 1.24</td>
-                <td>SQLite</td>
-                <td>Atomic transactions, SQLite delivery ledger</td>
-                <td><a href="https://github.com/med2004x/transactional-outbox" class="table-link" target="_blank" rel="noopener noreferrer">View code ↗</a></td>
-              </tr>
-              <tr>
-                <td><strong>Custom Domain Engine</strong></td>
-                <td>Go 1.25</td>
-                <td>In-Memory State</td>
-                <td>Decoupled DNS provider interface, stateful poller</td>
-                <td><a href="https://github.com/med2004x/custom-domain-automation" class="table-link" target="_blank" rel="noopener noreferrer">View code ↗</a></td>
-              </tr>
-              <tr>
-                <td><strong>Multitenant PG Engine</strong></td>
-                <td>Python 3.12</td>
-                <td>PostgreSQL 16</td>
-                <td>Isolated PG schemas, SELECT ... FOR UPDATE SKIP LOCKED</td>
-                <td><a href="https://github.com/med2004x/multitenant-engine" class="table-link" target="_blank" rel="noopener noreferrer">View code ↗</a></td>
-              </tr>
-              <tr>
-                <td><strong>Background Task Processor</strong></td>
-                <td>Python 3.12</td>
-                <td>Redis 7</td>
-                <td>Redis Hashes &amp; Sorted Sets queue, out-of-process worker</td>
-                <td><a href="https://github.com/med2004x/background-task-processor" class="table-link" target="_blank" rel="noopener noreferrer">View code ↗</a></td>
-              </tr>
-              <tr>
-                <td><strong>Go Full-Text Search</strong></td>
-                <td>Go 1.24</td>
-                <td>Inverted Index</td>
-                <td>Worker-backed concurrent tokenization &amp; ranking index</td>
-                <td><a href="https://github.com/med2004x/go-fulltext-search" class="table-link" target="_blank" rel="noopener noreferrer">View code ↗</a></td>
-              </tr>
-              <tr>
-                <td><strong>Kafka Event Pipeline</strong></td>
-                <td>Python 3.12</td>
-                <td>Kafka Broker</td>
-                <td>FastAPI ingestion, confluent-kafka topics, envelope retry backoffs</td>
-                <td><a href="https://github.com/med2004x/kafka-event-pipeline" class="table-link" target="_blank" rel="noopener noreferrer">View code ↗</a></td>
-              </tr>
-              <tr>
-                <td><strong>Multisurface API Gateway</strong></td>
-                <td>Go 1.25</td>
-                <td>YAML State</td>
-                <td>Reverse proxy, active downstream health checking, client rate-limiting</td>
-                <td><a href="https://github.com/med2004x/multisurface-api-gateway" class="table-link" target="_blank" rel="noopener noreferrer">View code ↗</a></td>
-              </tr>
-              <tr>
-                <td><strong>Observability Stack</strong></td>
-                <td>Go 1.25</td>
-                <td>Prometheus / OTel</td>
-                <td>Injectable telemetry adapter, RED metrics, separate health endpoints</td>
-                <td><a href="https://github.com/med2004x/observability-stack" class="table-link" target="_blank" rel="noopener noreferrer">View code ↗</a></td>
-              </tr>
-            </tbody>
-          </table>
-        </div>
-      </div>
-    </section>
-
-    <!-- Section 6: Engineering Philosophy -->
-    <section class="philosophy-section" id="philosophy">
-      <div class="section-container">
-        <h2 class="section-title">Engineering Philosophy</h2>
-        
-        <div class="philosophy-grid">
-          <div class="philosophy-item">
-            <div class="philosophy-meta">01</div>
-            <h3>Simplicity Over Abstraction</h3>
-            <p>Complexity increases operational costs. I design simple, readable architectures over clever, abstract layers. Code should be readable and straightforward to debug when a service fails under load.</p>
-          </div>
-          
-          <div class="philosophy-item">
-            <div class="philosophy-meta">02</div>
-            <h3>Product-First Decisions</h3>
-            <p>Technology exists to drive a business outcome. I write code with a deep awareness of product viability, billing quotas, and host cost efficiency.</p>
-          </div>
-
-          <div class="philosophy-item">
-            <div class="philosophy-meta">03</div>
-            <h3>Operational Telemetry</h3>
-            <p>A system is only complete when it is observable. Structured logging, Prometheus metrics, liveness probes, and distributed traces should be built in from day one, not added late after an incident occurs.</p>
-          </div>
-
-          <div class="philosophy-item">
-            <div class="philosophy-meta">04</div>
-            <h3>Complete Ownership</h3>
-            <p>Independent execution requires absolute accountability. I own my code from the first system diagram to live container orchestration and incident response.</p>
-          </div>
-        </div>
-      </div>
-    </section>
-
-    <!-- Section 7: Contact -->
-    <section class="contact-section" id="contact">
-      <div class="section-container">
-        <h2 class="section-title">Contact</h2>
-        <div class="contact-layout">
-          <div class="contact-text">
-            <p class="contact-lead">Need a resilient backend system or multi-tenant pipeline?</p>
-            <p>I collaborate with founders, technical leaders, and startups seeking high autonomy, system performance, and rapid independent execution.</p>
-          </div>
-          
-          <div class="contact-links-container">
-            <div class="contact-method">
-              <span class="contact-label">Email</span>
-              <div class="email-wrapper">
-                <a href="mailto:med@med2004x.com" class="contact-value highlight-link select-email">med@med2004x.com</a>
-                <span class="email-hint">Click email to copy or write</span>
-              </div>
-            </div>
-
-            <div class="contact-method">
-              <span class="contact-label">GitHub</span>
-              <a href="https://github.com/med2004x" target="_blank" rel="noopener noreferrer" class="contact-value">github.com/med2004x</a>
-            </div>
-
-            <div class="contact-method">
-              <span class="contact-label">LinkedIn</span>
-              <a href="https://linkedin.com/in/med2004x" target="_blank" rel="noopener noreferrer" class="contact-value">linkedin.com/in/med2004x</a>
-            </div>
-          </div>
-        </div>
-      </div>
-    </section>
-  </main>
-
-  <footer class="footer">
-    <div class="footer-container">
-      <p class="copyright">&copy; 2026 med2004x. All rights reserved. Built for latency-sensitive operation.</p>
-      <p class="footer-meta">HTML5 &amp; CSS3 only. Zero JavaScript.</p>
+    <div class="stats rv">
+      <div class="stat"><div class="stat-n">30<span>+</span></div><div class="stat-l">Public Repos</div></div>
+      <div class="stat"><div class="stat-n">2</div><div class="stat-l">SaaS Products</div></div>
+      <div class="stat"><div class="stat-n">5<span>+</span></div><div class="stat-l">Languages</div></div>
+      <div class="stat"><div class="stat-n">3<span>+</span></div><div class="stat-l">Years Building</div></div>
     </div>
-  </footer>
+  </div>
+</section>
 
+<!-- CASE STUDIES -->
+<section id="case-studies">
+  <div class="w">
+    <div class="slbl">Case Studies</div>
+    <div class="cs-list">
+
+      <!-- MAHALL -->
+      <article class="cs-card rv">
+        <div class="cs-hd">
+          <div class="cs-meta">
+            <span class="cs-tag">Multi-Tenant SaaS</span>
+            <a href="https://github.com/med2004x/mahall-case-study" class="cs-gh" target="_blank" rel="noopener">github.com/med2004x/mahall-case-study ↗</a>
+          </div>
+          <h2 class="cs-title">Mahall — Multi-Tenant E-commerce Infrastructure</h2>
+        </div>
+        <div class="cs-body">
+          <div class="cs-text">
+            <div class="cs-cols">
+              <div>
+                <div class="cs-cl">The problem</div>
+                <div class="cs-ct">Standard checkout flows execute catalog lookups, inventory reservation, and payment capture in one synchronous transaction. Under concurrent load, slow payment gateways cause full table locks, and inventory checks deadlock with merchant catalog writes sharing the same DB connection pool.</div>
+              </div>
+              <div>
+                <div class="cs-cl">The solution</div>
+                <div class="cs-ct">The API accepts orders immediately at the edge and drops intent into Redis. An order orchestrator picks up async, fans out to decoupled Catalog and Inventory services, runs payment, and persists final state to PostgreSQL — never blocking the request thread on heavy I/O.</div>
+              </div>
+            </div>
+            <div class="cs-decs">
+              <div class="cs-di"><span class="cs-arr">→</span><span class="cs-dt">Catalog and Inventory run as separate services so heavy merchant write bursts don't contend with checkout read paths.</span></div>
+              <div class="cs-di"><span class="cs-arr">→</span><span class="cs-dt">Order orchestrator coordinates reservation, payment intent, and payout allocation fully outside the HTTP request cycle.</span></div>
+              <div class="cs-di"><span class="cs-arr">→</span><span class="cs-dt">Seller payouts use a double-entry ledger pattern — funds release only after the fulfillment service confirms delivery proof.</span></div>
+              <div class="cs-di"><span class="cs-arr">→</span><span class="cs-dt">Storefront templates are tenant-scoped and served via Cloudflare R2 + CDN edge — no origin hit for static assets.</span></div>
+            </div>
+          </div>
+          <div class="cs-diag">
+            <!-- MAHALL ARCHITECTURE DIAGRAM -->
+            <svg class="dsvg" viewBox="0 0 310 560" xmlns="http://www.w3.org/2000/svg">
+              <defs>
+                <marker id="a-cy" markerWidth="7" markerHeight="6" refX="5" refY="3" orient="auto"><path d="M0,0 L0,6 L7,3 z" fill="rgba(34,211,238,.5)"/></marker>
+                <marker id="a-am" markerWidth="7" markerHeight="6" refX="5" refY="3" orient="auto"><path d="M0,0 L0,6 L7,3 z" fill="rgba(251,191,36,.5)"/></marker>
+                <marker id="a-vi" markerWidth="7" markerHeight="6" refX="5" refY="3" orient="auto"><path d="M0,0 L0,6 L7,3 z" fill="rgba(167,139,250,.5)"/></marker>
+                <marker id="a-em" markerWidth="7" markerHeight="6" refX="5" refY="3" orient="auto"><path d="M0,0 L0,6 L7,3 z" fill="rgba(52,211,153,.5)"/></marker>
+              </defs>
+
+              <!-- Layer labels -->
+              <text class="dpl" x="8" y="26">Edge layer</text>
+              <text class="dpl" x="8" y="148">Async boundary</text>
+              <text class="dpl" x="8" y="258">Service layer</text>
+              <text class="dpl" x="8" y="418">Storage layer</text>
+
+              <!-- Storefront (Next.js) -->
+              <rect class="dn dn-sl" x="20" y="34" width="120" height="32" rx="6"/>
+              <text class="dt dt-sl" x="80" y="50">Next.js Storefront</text>
+
+              <!-- API Gateway -->
+              <rect class="dn dn-cy" x="160" y="34" width="130" height="32" rx="6"/>
+              <text class="dt dt-cy" x="225" y="50">Go API Gateway</text>
+
+              <!-- edge: storefront -> gateway -->
+              <path id="e1" class="de de-sl" d="M140,50 L160,50" marker-end="url(#a-cy)"/>
+              <circle r="2.5" fill="#94a3b8"><animateMotion dur="1.2s" repeatCount="indefinite"><mpath href="#e1"/></animateMotion></circle>
+
+              <!-- Order Intake -->
+              <rect class="dn dn-cy" x="80" y="100" width="150" height="32" rx="6"/>
+              <text class="dt dt-cy" x="155" y="116">Order Intake API</text>
+
+              <!-- gateway -> order intake -->
+              <path id="e2" class="de de-cy" d="M225,66 L225,88 L155,100" marker-end="url(#a-cy)"/>
+              <circle r="2.5" fill="#22d3ee"><animateMotion dur="1.0s" repeatCount="indefinite"><mpath href="#e2"/></animateMotion></circle>
+
+              <!-- sync return label -->
+              <text class="del" x="240" y="88">sync 200</text>
+
+              <!-- Async boundary line -->
+              <line x1="14" y1="156" x2="296" y2="156" stroke="rgba(251,191,36,.2)" stroke-width="1" stroke-dasharray="4 3"/>
+              <text class="del" x="155" y="164" style="fill:rgba(251,191,36,.35)">async handoff</text>
+
+              <!-- Redis Queue -->
+              <rect class="dn dn-am" x="92" y="172" width="126" height="32" rx="6"/>
+              <text class="dt dt-am" x="155" y="188">Redis Queue</text>
+
+              <!-- order intake -> redis -->
+              <path id="e3" class="de de-am" d="M155,132 L155,172" marker-end="url(#a-am)"/>
+              <circle r="2.5" fill="#fbbf24"><animateMotion dur="0.9s" repeatCount="indefinite"><mpath href="#e3"/></animateMotion></circle>
+
+              <!-- Order Orchestrator -->
+              <rect class="dn dn-vi" x="68" y="230" width="174" height="32" rx="6"/>
+              <text class="dt dt-vi" x="155" y="246">Order Orchestrator</text>
+
+              <!-- redis -> orchestrator -->
+              <path id="e4" class="de de-vi" d="M155,204 L155,230" marker-end="url(#a-vi)"/>
+              <circle r="2.5" fill="#a78bfa"><animateMotion dur="1.1s" repeatCount="indefinite"><mpath href="#e4"/></animateMotion></circle>
+
+              <!-- Fan out to 3 services -->
+              <path id="e5" class="de de-vi" d="M120,262 L65,294" marker-end="url(#a-vi)"/>
+              <circle r="2" fill="#a78bfa"><animateMotion dur="1.0s" repeatCount="indefinite" begin="0s"><mpath href="#e5"/></animateMotion></circle>
+              <path id="e6" class="de de-vi" d="M155,262 L155,294" marker-end="url(#a-vi)"/>
+              <circle r="2" fill="#a78bfa"><animateMotion dur="1.0s" repeatCount="indefinite" begin=".33s"><mpath href="#e6"/></animateMotion></circle>
+              <path id="e7" class="de de-vi" d="M190,262 L245,294" marker-end="url(#a-vi)"/>
+              <circle r="2" fill="#a78bfa"><animateMotion dur="1.0s" repeatCount="indefinite" begin=".66s"><mpath href="#e7"/></animateMotion></circle>
+
+              <!-- Catalog service -->
+              <rect class="dn dn-vi" x="12" y="294" width="106" height="30" rx="6"/>
+              <text class="dt dt-vi" x="65" y="306">Catalog</text>
+              <text class="ds" x="65" y="317">+Inventory</text>
+
+              <!-- Payment service -->
+              <rect class="dn dn-vi" x="102" y="294" width="106" height="30" rx="6"/>
+              <text class="dt dt-vi" x="155" y="309">Payment</text>
+
+              <!-- Payout service -->
+              <rect class="dn dn-vi" x="192" y="294" width="106" height="30" rx="6"/>
+              <text class="dt dt-vi" x="245" y="306">Payout</text>
+              <text class="ds" x="245" y="317">ledger</text>
+
+              <!-- All services -> PostgreSQL -->
+              <path id="e8" class="de de-em" d="M65,324 L100,390" marker-end="url(#a-em)"/>
+              <circle r="2" fill="#34d399"><animateMotion dur="1.2s" repeatCount="indefinite" begin=".1s"><mpath href="#e8"/></animateMotion></circle>
+              <path id="e9" class="de de-em" d="M155,324 L155,390" marker-end="url(#a-em)"/>
+              <circle r="2" fill="#34d399"><animateMotion dur="1.2s" repeatCount="indefinite" begin=".5s"><mpath href="#e9"/></animateMotion></circle>
+              <path id="e10" class="de de-em" d="M245,324 L210,390" marker-end="url(#a-em)"/>
+              <circle r="2" fill="#34d399"><animateMotion dur="1.2s" repeatCount="indefinite" begin=".9s"><mpath href="#e10"/></animateMotion></circle>
+
+              <!-- PostgreSQL -->
+              <rect class="dn dn-em" x="56" y="390" width="198" height="32" rx="6"/>
+              <text class="dt dt-em" x="155" y="406">PostgreSQL</text>
+
+              <!-- R2 Storage (for storefront assets) -->
+              <rect class="dn dn-or" x="12" y="458" width="130" height="30" rx="6"/>
+              <text class="dt dt-or" x="77" y="469">Cloudflare R2</text>
+              <text class="ds" x="77" y="480">storefront assets</text>
+
+              <!-- CDN Edge -->
+              <rect class="dn dn-sl" x="160" y="458" width="130" height="30" rx="6"/>
+              <text class="dt dt-sl" x="225" y="469">CDN Edge</text>
+              <text class="ds" x="225" y="480">static delivery</text>
+
+              <!-- pg -> R2 -->
+              <path id="e11" class="de de-or" d="M100,422 L77,458" marker-end="url(#a-em)" style="stroke:rgba(251,146,60,.3)"/>
+              <circle r="2" fill="#fb923c"><animateMotion dur="1.6s" repeatCount="indefinite"><mpath href="#e11"/></animateMotion></circle>
+
+              <!-- R2 -> CDN -->
+              <path id="e12" class="de de-sl" d="M142,473 L160,473" marker-end="url(#a-cy)" style="stroke:rgba(148,163,184,.25)"/>
+              <circle r="2" fill="#94a3b8"><animateMotion dur="1.8s" repeatCount="indefinite"><mpath href="#e12"/></animateMotion></circle>
+
+              <!-- CDN back to storefront -->
+              <path id="e13" class="de de-sl" d="M225,458 L225,440 L80,440 L80,66" marker-end="url(#a-cy)" style="stroke:rgba(148,163,184,.15)"/>
+              <circle r="2" fill="#94a3b8"><animateMotion dur="3s" repeatCount="indefinite"><mpath href="#e13"/></animateMotion></circle>
+
+              <!-- State transitions at bottom -->
+              <text class="del" x="155" y="518" style="fill:#334155">pending → processing → fulfilled</text>
+            </svg>
+          </div>
+        </div>
+        <div class="cs-tags">
+          <span class="tag">Go</span><span class="tag">PostgreSQL</span><span class="tag">Redis</span><span class="tag">Next.js</span><span class="tag">Docker</span><span class="tag">Cloudflare</span><span class="tag">R2 Storage</span>
+        </div>
+      </article>
+
+      <!-- LEAD SOURCE -->
+      <article class="cs-card rv">
+        <div class="cs-hd">
+          <div class="cs-meta">
+            <span class="cs-tag">Data Platform</span>
+            <a href="https://github.com/med2004x/lead-source-architecture-case-study" class="cs-gh" target="_blank" rel="noopener">github.com/med2004x/lead-source-architecture-case-study ↗</a>
+          </div>
+          <h2 class="cs-title">Lead Source — Three-Plane Lead Acquisition Platform</h2>
+        </div>
+        <div class="cs-body">
+          <div class="cs-text">
+            <div class="cs-cols">
+              <div>
+                <div class="cs-cl">The problem</div>
+                <div class="cs-ct">Scraping jobs fan out across hundreds of source-location-keyword combinations and can't run synchronously from an API surface. Browser-assisted sources (Playwright) share heap with the HTTP process, causing OOM kills mid-run. Outreach messaging has completely different latency and compliance requirements than scraping — coupling them to one process model means messaging failures destabilize scraper throughput.</div>
+              </div>
+              <div>
+                <div class="cs-cl">ADR-documented decisions</div>
+                <div class="cs-ct">Split into three independent planes per ADR-001: control (API + dashboard + scheduling), data (worker + adapters + browser cluster + external sources), and engagement (WhatsApp agent with its own SQLite state store). Redis is the execution backbone per ADR-002, keeping the API responsive while workers drain async. WhatsApp is a separate runtime boundary per ADR-003 — messaging failures don't touch scraper runs.</div>
+              </div>
+            </div>
+            <div class="cs-decs">
+              <div class="cs-di"><span class="cs-arr">→</span><span class="cs-dt">Worker expands jobs into source-specific tasks routed through adapter implementations — static HTTP, API, and browser-assisted sources all conform to the same pipeline contract after extraction.</span></div>
+              <div class="cs-di"><span class="cs-arr">→</span><span class="cs-dt">Browser workers (Playwright remote server) run in a separate container with its own resource ceiling — a memory leak there doesn't reach the control plane API.</span></div>
+              <div class="cs-di"><span class="cs-arr">→</span><span class="cs-dt">Job lineage is persisted to PostgreSQL (jobs, runs, leads, exports, audit records) rather than reconstructed from logs — reruns and operator inspection work without bespoke tooling.</span></div>
+              <div class="cs-di"><span class="cs-arr">→</span><span class="cs-dt">WhatsApp agent consumes exported datasets via file handoff, maintains conversation state in SQLite, and runs its own webhook server — no coupling to scraper throughput or Redis queue health.</span></div>
+            </div>
+          </div>
+          <div class="cs-diag">
+            <!-- LEAD SOURCE 3-PLANE ARCHITECTURE -->
+            <svg class="dsvg" viewBox="0 0 310 640" xmlns="http://www.w3.org/2000/svg">
+              <defs>
+                <marker id="b-cy" markerWidth="7" markerHeight="6" refX="5" refY="3" orient="auto"><path d="M0,0 L0,6 L7,3 z" fill="rgba(34,211,238,.5)"/></marker>
+                <marker id="b-am" markerWidth="7" markerHeight="6" refX="5" refY="3" orient="auto"><path d="M0,0 L0,6 L7,3 z" fill="rgba(251,191,36,.5)"/></marker>
+                <marker id="b-vi" markerWidth="7" markerHeight="6" refX="5" refY="3" orient="auto"><path d="M0,0 L0,6 L7,3 z" fill="rgba(167,139,250,.5)"/></marker>
+                <marker id="b-em" markerWidth="7" markerHeight="6" refX="5" refY="3" orient="auto"><path d="M0,0 L0,6 L7,3 z" fill="rgba(52,211,153,.5)"/></marker>
+                <marker id="b-or" markerWidth="7" markerHeight="6" refX="5" refY="3" orient="auto"><path d="M0,0 L0,6 L7,3 z" fill="rgba(251,146,60,.5)"/></marker>
+                <marker id="b-sl" markerWidth="7" markerHeight="6" refX="5" refY="3" orient="auto"><path d="M0,0 L0,6 L7,3 z" fill="rgba(148,163,184,.4)"/></marker>
+              </defs>
+
+              <!-- ── PLANE 1: CONTROL PLANE ── -->
+              <rect class="dpb" x="8" y="14" width="295" height="132" rx="6"/>
+              <text class="dpl" x="16" y="28">Control Plane</text>
+
+              <!-- Frontend dashboard -->
+              <rect class="dn dn-sl" x="16" y="36" width="110" height="30" rx="5"/>
+              <text class="dt dt-sl" x="71" y="51">Frontend</text>
+              <text class="ds" x="71" y="61">operator dashboard</text>
+
+              <!-- API -->
+              <rect class="dn dn-cy" x="148" y="36" width="90" height="30" rx="5"/>
+              <text class="dt dt-cy" x="193" y="51">Python API</text>
+
+              <!-- Prometheus -->
+              <rect class="dn dn-or" x="248" y="36" width="50" height="30" rx="5"/>
+              <text class="dt dt-or" x="273" y="48">Prom</text>
+              <text class="ds" x="273" y="59">+Grafana</text>
+
+              <!-- Frontend <-> API -->
+              <path id="c1" class="de de-sl" d="M126,51 L148,51" marker-end="url(#b-cy)"/>
+              <circle r="2.2" fill="#94a3b8"><animateMotion dur="1.1s" repeatCount="indefinite"><mpath href="#c1"/></animateMotion></circle>
+
+              <!-- API -> Prometheus -->
+              <path id="c2" class="de de-or" d="M238,51 L248,51" marker-end="url(#b-or)"/>
+              <circle r="2" fill="#fb923c"><animateMotion dur="2s" repeatCount="indefinite"><mpath href="#c2"/></animateMotion></circle>
+
+              <!-- Redis Queue (shared) -->
+              <rect class="dn dn-am" x="82" y="100" width="100" height="30" rx="5"/>
+              <text class="dt dt-am" x="132" y="115">Redis Queue</text>
+
+              <!-- PostgreSQL (shared) -->
+              <rect class="dn dn-em" x="192" y="100" width="104" height="30" rx="5"/>
+              <text class="dt dt-em" x="244" y="115">PostgreSQL</text>
+
+              <!-- API -> Redis -->
+              <path id="c3" class="de de-am" d="M193,66 L175,85 L132,100" marker-end="url(#b-am)"/>
+              <circle r="2.2" fill="#fbbf24"><animateMotion dur="1.0s" repeatCount="indefinite"><mpath href="#c3"/></animateMotion></circle>
+
+              <!-- API -> PostgreSQL -->
+              <path id="c4" class="de de-em" d="M238,66 L244,100" marker-end="url(#b-em)"/>
+              <circle r="2.2" fill="#34d399"><animateMotion dur="1.3s" repeatCount="indefinite"><mpath href="#c4"/></animateMotion></circle>
+
+              <!-- ── PLANE 2: DATA PLANE ── -->
+              <rect class="dpb" x="8" y="164" width="295" height="200" rx="6"/>
+              <text class="dpl" x="16" y="178">Data Plane</text>
+
+              <!-- Worker -->
+              <rect class="dn dn-vi" x="90" y="186" width="130" height="30" rx="5"/>
+              <text class="dt dt-vi" x="155" y="201">Worker</text>
+
+              <!-- Worker <- Redis (cross-plane) -->
+              <path id="c5" class="de de-am" d="M132,146 L132,158 L132,186" marker-end="url(#b-vi)"/>
+              <circle r="2.2" fill="#fbbf24"><animateMotion dur="0.9s" repeatCount="indefinite"><mpath href="#c5"/></animateMotion></circle>
+
+              <!-- Worker -> PostgreSQL (cross-plane) -->
+              <path id="c6" class="de de-em" d="M220,216 L244,216 L244,146 L244,130" marker-end="url(#b-em)" style="stroke:rgba(52,211,153,.25)"/>
+              <circle r="2" fill="#34d399"><animateMotion dur="1.5s" repeatCount="indefinite"><mpath href="#c6"/></animateMotion></circle>
+
+              <!-- Adapters row -->
+              <rect class="dn dn-vi" x="16" y="248" width="82" height="28" rx="5"/>
+              <text class="dt dt-vi" x="57" y="258">HTTP</text>
+              <text class="ds" x="57" y="268">adapters</text>
+
+              <rect class="dn dn-vi" x="108" y="248" width="82" height="28" rx="5"/>
+              <text class="dt dt-vi" x="149" y="258">Browser</text>
+              <text class="ds" x="149" y="268">Playwright</text>
+
+              <rect class="dn dn-vi" x="200" y="248" width="100" height="28" rx="5"/>
+              <text class="dt dt-vi" x="250" y="258">reacher</text>
+              <text class="ds" x="250" y="268">+gmaps +Tor</text>
+
+              <!-- Worker fans to adapters -->
+              <path id="c7" class="de de-vi" d="M128,216 L57,248" marker-end="url(#b-vi)"/>
+              <circle r="2" fill="#a78bfa"><animateMotion dur="1.0s" repeatCount="indefinite" begin="0s"><mpath href="#c7"/></animateMotion></circle>
+              <path id="c8" class="de de-vi" d="M155,216 L149,248" marker-end="url(#b-vi)"/>
+              <circle r="2" fill="#a78bfa"><animateMotion dur="1.0s" repeatCount="indefinite" begin=".4s"><mpath href="#c8"/></animateMotion></circle>
+              <path id="c9" class="de de-vi" d="M182,216 L250,248" marker-end="url(#b-vi)"/>
+              <circle r="2" fill="#a78bfa"><animateMotion dur="1.0s" repeatCount="indefinite" begin=".8s"><mpath href="#c9"/></animateMotion></circle>
+
+              <!-- External sources back to worker -->
+              <rect class="dn dn-sl" x="82" y="314" width="146" height="28" rx="5"/>
+              <text class="dt dt-sl" x="155" y="324">External Sources</text>
+              <text class="ds" x="155" y="334">normalized + enriched leads</text>
+
+              <path id="c10" class="de de-sl" d="M57,276 L57,304 L82,318" marker-end="url(#b-vi)" style="stroke:rgba(148,163,184,.2)"/>
+              <circle r="2" fill="#94a3b8"><animateMotion dur="1.3s" repeatCount="indefinite" begin="0s"><mpath href="#c10"/></animateMotion></circle>
+              <path id="c11" class="de de-sl" d="M149,276 L149,314" marker-end="url(#b-vi)" style="stroke:rgba(148,163,184,.2)"/>
+              <circle r="2" fill="#94a3b8"><animateMotion dur="1.3s" repeatCount="indefinite" begin=".6s"><mpath href="#c11"/></animateMotion></circle>
+              <path id="c12" class="de de-sl" d="M250,276 L250,304 L228,318" marker-end="url(#b-vi)" style="stroke:rgba(148,163,184,.2)"/>
+              <circle r="2" fill="#94a3b8"><animateMotion dur="1.3s" repeatCount="indefinite" begin="1.2s"><mpath href="#c12"/></animateMotion></circle>
+
+              <!-- ── EXPORT HANDOFF ── -->
+              <line x1="14" y1="388" x2="296" y2="388" stroke="rgba(251,146,60,.18)" stroke-width="1" stroke-dasharray="4 3"/>
+              <text class="del" x="155" y="397" style="fill:rgba(251,146,60,.4)">export file handoff</text>
+
+              <!-- ── PLANE 3: ENGAGEMENT PLANE ── -->
+              <rect class="dpb" x="8" y="406" width="295" height="160" rx="6"/>
+              <text class="dpl" x="16" y="420">Engagement Plane</text>
+
+              <!-- Export files -->
+              <rect class="dn dn-sl" x="16" y="428" width="100" height="30" rx="5"/>
+              <text class="dt dt-sl" x="66" y="440">Export Files</text>
+              <text class="ds" x="66" y="451">from PostgreSQL</text>
+
+              <!-- WhatsApp Agent -->
+              <rect class="dn dn-em" x="130" y="428" width="130" height="30" rx="5"/>
+              <text class="dt dt-em" x="195" y="440">WhatsApp Agent</text>
+              <text class="ds" x="195" y="451">own SQLite state</text>
+
+              <!-- Export -> WhatsApp Agent -->
+              <path id="c13" class="de de-em" d="M116,443 L130,443" marker-end="url(#b-em)"/>
+              <circle r="2.2" fill="#34d399"><animateMotion dur="2s" repeatCount="indefinite"><mpath href="#c13"/></animateMotion></circle>
+
+              <!-- WhatsApp Agent -> WhatsApp Graph API -->
+              <rect class="dn dn-em" x="90" y="496" width="130" height="30" rx="5"/>
+              <text class="dt dt-em" x="155" y="507">WhatsApp Graph</text>
+              <text class="ds" x="155" y="518">API + webhook server</text>
+
+              <path id="c14" class="de de-em" d="M195,458 L195,480 L155,496" marker-end="url(#b-em)"/>
+              <circle r="2.2" fill="#34d399"><animateMotion dur="1.5s" repeatCount="indefinite"><mpath href="#c14"/></animateMotion></circle>
+
+              <!-- SQLite (conversation state) -->
+              <rect class="dn dn-am" x="228" y="480" width="72" height="28" rx="5"/>
+              <text class="dt dt-am" x="264" y="490">SQLite</text>
+              <text class="ds" x="264" y="500">conv. state</text>
+
+              <path id="c15" class="de de-am" d="M260,458 L264,480" marker-end="url(#b-am)"/>
+              <circle r="2" fill="#fbbf24"><animateMotion dur="1.8s" repeatCount="indefinite"><mpath href="#c15"/></animateMotion></circle>
+
+              <!-- PostgreSQL -> Export Files (cross-plane) -->
+              <path id="c16" class="de de-em" d="M192,130 L66,130 L66,406 L66,428" marker-end="url(#b-sl)" style="stroke:rgba(52,211,153,.15)"/>
+              <circle r="2" fill="#34d399"><animateMotion dur="4s" repeatCount="indefinite"><mpath href="#c16"/></animateMotion></circle>
+
+              <!-- State label -->
+              <text class="del" x="155" y="580" style="fill:#334155">3 decoupled runtime boundaries · ADR-001/002/003</text>
+            </svg>
+          </div>
+        </div>
+        <div class="cs-tags">
+          <span class="tag">Python</span><span class="tag">Playwright</span><span class="tag">PostgreSQL</span><span class="tag">Redis</span><span class="tag">Docker Compose</span><span class="tag">Prometheus</span><span class="tag">Grafana</span><span class="tag">WhatsApp Graph API</span>
+        </div>
+      </article>
+
+    </div>
+  </div>
+</section>
+
+<!-- ENGINE ROOM -->
+<section id="engine-room">
+  <div class="w">
+    <div class="slbl">Engine Room</div>
+    <p class="eng-intro">Eight backend services, each built to solve a specific consistency, isolation, or reliability problem. Real version numbers, real ports, real design decisions — all documented in public repos.</p>
+    <div class="eng-g">
+
+      <article class="ec rv">
+        <div class="et"><span class="en">01 — :8093</span><a href="https://github.com/med2004x/transactional-outbox" class="egl" target="_blank" rel="noopener">transactional-outbox ↗</a></div>
+        <div class="ename">Transactional Outbox Relay</div>
+        <div class="ebody">
+          <p>The dual-write problem: commit to the database, publish to the broker — one of them fails and your system is inconsistent. Orders and outbox entries are inserted in the same SQLite transaction, so domain state and integration intent commit or roll back together.</p>
+          <div class="edecs">
+            <div class="edi"><span class="edi-arr">→</span><span class="edi-t">Relay loop is config-driven — operators can also trigger a bounded dispatch batch through the API without waiting for the next poll interval.</span></div>
+            <div class="edi"><span class="edi-arr">→</span><span class="edi-t">Every failed dispatch increments <code>attempts</code>, stores <code>last_error</code>, and schedules the next retry with exponential backoff. Status is queryable, not buried in logs.</span></div>
+            <div class="edi"><span class="edi-arr">→</span><span class="edi-t">Dead-letter path is an explicit schema state (<code>dead</code>), not a separate queue — operators inspect it through the API without bespoke tooling.</span></div>
+          </div>
+        </div>
+        <div class="efoot"><span class="ct">Go 1.24</span><span class="ct">SQLite (ncruces/go-sqlite3)</span><span class="ct">zerolog 1.34</span><span class="ct">Docker Compose v2</span></div>
+      </article>
+
+      <article class="ec rv d1">
+        <div class="et"><span class="en">02 — :8090</span><a href="https://github.com/med2004x/custom-domain-automation" class="egl" target="_blank" rel="noopener">custom-domain-automation ↗</a></div>
+        <div class="ename">Custom Domain Validation Engine</div>
+        <div class="ebody">
+          <p>Custom domain onboarding fails silently when DNS records haven't propagated — tenants see SSL errors with no explanation. This service treats verification and provisioning as a stateful workflow with a dedicated polling loop and explicit status transitions.</p>
+          <div class="edecs">
+            <div class="edi"><span class="edi-arr">→</span><span class="edi-t">DNS provider is behind an interface — swapping registrar integrations doesn't touch the state machine. Same flow works for sync demos and async real providers.</span></div>
+            <div class="edi"><span class="edi-arr">→</span><span class="edi-t">Domains carry their verification token and target value in persisted state — the workflow survives restarts without replaying requests.</span></div>
+            <div class="edi"><span class="edi-arr">→</span><span class="edi-t"><code>/readyz</code> reflects whether the poller loop is active, not just whether the HTTP process is alive — a real readiness distinction.</span></div>
+          </div>
+        </div>
+        <div class="efoot"><span class="ct">Go 1.25</span><span class="ct">zerolog 1.34</span><span class="ct">Alpine 3.21</span><span class="ct">Docker Compose v2</span></div>
+      </article>
+
+      <article class="ec rv d2">
+        <div class="et"><span class="en">03 — :8094</span><a href="https://github.com/med2004x/multitenant-engine" class="egl" target="_blank" rel="noopener">multitenant-engine ↗</a></div>
+        <div class="ename">PostgreSQL Multitenant Engine</div>
+        <div class="ebody">
+          <p>Schema-per-tenant isolation: shared metadata in <code>public</code>, tenant-owned records in <code>tenant_&lt;slug&gt;</code> schemas — independently backable, auditable, and migratable per customer.</p>
+          <div class="edecs">
+            <div class="edi"><span class="edi-arr">→</span><span class="edi-t">Tenant creation is async — schema provisioning doesn't block control-plane writes or hit HTTP timeouts.</span></div>
+            <div class="edi"><span class="edi-arr">→</span><span class="edi-t">Bootstrap jobs claimed with <code>FOR UPDATE SKIP LOCKED</code> — safe horizontal scaling without double-provisioning.</span></div>
+            <div class="edi"><span class="edi-arr">→</span><span class="edi-t">Request middleware enforces auth globally and tenant-resolution only on tenant-scoped routes — no per-handler boilerplate.</span></div>
+          </div>
+        </div>
+        <div class="efoot"><span class="ct">Python 3.12</span><span class="ct">FastAPI 0.116.1</span><span class="ct">asyncpg 0.30</span><span class="ct">PostgreSQL 16</span><span class="ct">Pydantic 2.11</span></div>
+      </article>
+
+      <article class="ec rv">
+        <div class="et"><span class="en">04 — :8095</span><a href="https://github.com/med2004x/background-task-processor" class="egl" target="_blank" rel="noopener">background-task-processor ↗</a></div>
+        <div class="ename">Redis-Backed Task Processor</div>
+        <div class="ebody">
+          <p>Celery is too heavy for most of what I build. The gap is usually retry orchestration and failure visibility — teams enqueue work quickly but lose durable status tracking and a clean dead-letter story. Redis primitives fill that gap without a broker stack.</p>
+          <div class="edecs">
+            <div class="edi"><span class="edi-arr">→</span><span class="edi-t">Hashes for task state, lists for the pending queue, sorted sets for scheduled retries, dedicated list for dead-letter — each Redis primitive matches its access pattern exactly.</span></div>
+            <div class="edi"><span class="edi-arr">→</span><span class="edi-t">Worker, retry scheduler, and cleanup loop run independently — bursts in one path don't stall the others.</span></div>
+            <div class="edi"><span class="edi-arr">→</span><span class="edi-t">Task handlers are registry-driven — new task types add without touching queue plumbing. Failed tasks preserve <code>last_error</code> and attempt history, not silently re-enqueued.</span></div>
+          </div>
+        </div>
+        <div class="efoot"><span class="ct">Python 3.12</span><span class="ct">FastAPI 0.116.1</span><span class="ct">Redis 7</span><span class="ct">redis-py 6.4</span><span class="ct">Pydantic 2.11</span></div>
+      </article>
+
+      <article class="ec rv d1">
+        <div class="et"><span class="en">05 — :8091</span><a href="https://github.com/med2004x/go-fulltext-search" class="egl" target="_blank" rel="noopener">go-fulltext-search ↗</a></div>
+        <div class="ename">Full-Text Search Engine</div>
+        <div class="ebody">
+          <p>LIKE queries don't rank. Elasticsearch is RAM-heavy and operationally expensive for internal catalogs, back-office tools, or tenant-scoped knowledge bases that need ranked search without running a cluster.</p>
+          <div class="edecs">
+            <div class="edi"><span class="edi-arr">→</span><span class="edi-t">Writes are acknowledged only after a worker completes the index mutation — no false-success before search catches up.</span></div>
+            <div class="edi"><span class="edi-arr">→</span><span class="edi-t">Raw documents live in a separate repository from the inverted index — ranking and token lookup stay isolated from document retrieval.</span></div>
+            <div class="edi"><span class="edi-arr">→</span><span class="edi-t">Index ops move through a bounded channel (<code>SEARCH_QUEUE_DEPTH</code>) — backpressure is visible through <code>GET /stats</code>, not silently spawning goroutines.</span></div>
+          </div>
+        </div>
+        <div class="efoot"><span class="ct">Go 1.24</span><span class="ct">Custom Inverted Index</span><span class="ct">zerolog</span><span class="ct">Docker Compose v2</span></div>
+      </article>
+
+      <article class="ec rv d2">
+        <div class="et"><span class="en">06 — :8081</span><a href="https://github.com/med2004x/kafka-event-pipeline" class="egl" target="_blank" rel="noopener">kafka-event-pipeline ↗</a></div>
+        <div class="ename">Kafka Event Pipeline</div>
+        <div class="ebody">
+          <p>Event pipelines fail quietly — producers keep writing, consumers keep crashing, operators discover bad payloads after downstream state has already drifted. This pairs validated event intake with explicit retry state and an inspectable dead-letter topic.</p>
+          <div class="edecs">
+            <div class="edi"><span class="edi-arr">→</span><span class="edi-t">Retry timing encoded in the message envelope — backoff state travels with the event and is readable from the topic history without separate tooling.</span></div>
+            <div class="edi"><span class="edi-arr">→</span><span class="edi-t">Transport is config-driven: <code>embedded</code> asyncio for deterministic local dev, <code>kafka</code> mode switches to real confluent-kafka adapter. Same routing logic either way.</span></div>
+            <div class="edi"><span class="edi-arr">→</span><span class="edi-t">4 explicit topic states: <code>raw → retry → processed → dead</code>. Routing logic is isolated from the transport adapter so it's testable without a broker process.</span></div>
+          </div>
+        </div>
+        <div class="efoot"><span class="ct">Python 3.12</span><span class="ct">FastAPI 0.115.12</span><span class="ct">confluent-kafka 2.8.2</span><span class="ct">Pydantic 2.11</span></div>
+      </article>
+
+      <article class="ec rv">
+        <div class="et"><span class="en">07 — :8088</span><a href="https://github.com/med2004x/multisurface-api-gateway" class="egl" target="_blank" rel="noopener">multisurface-api-gateway ↗</a></div>
+        <div class="ename">Multisurface API Gateway</div>
+        <div class="ebody">
+          <p>When product traffic splits across storefront, merchant, and back-office upstreams, each service tends to reinvent auth and throttling independently. This gateway centralizes those controls while keeping route behavior declarative through committed YAML config.</p>
+          <div class="edecs">
+            <div class="edi"><span class="edi-arr">→</span><span class="edi-t">API keys referenced by symbolic IDs in route config, resolved from env at startup — secrets stay out of source control, key rotation doesn't require a recompile.</span></div>
+            <div class="edi"><span class="edi-arr">→</span><span class="edi-t">Rate limiting enforced per route and per caller key — noisy traffic is isolated to the surface generating it, not pooled globally.</span></div>
+            <div class="edi"><span class="edi-arr">→</span><span class="edi-t">Upstream readiness computed from active health probes, not assumed from process status. Admin endpoints expose routing and probe state without shelling into containers.</span></div>
+          </div>
+        </div>
+        <div class="efoot"><span class="ct">Go 1.25</span><span class="ct">zerolog 1.34</span><span class="ct">yaml.v3</span><span class="ct">Alpine 3.21</span><span class="ct">Docker Compose v2</span></div>
+      </article>
+
+      <article class="ec rv d1">
+        <div class="et"><span class="en">08 — :8096</span><a href="https://github.com/med2004x/observability-stack" class="egl" target="_blank" rel="noopener">observability-stack ↗</a></div>
+        <div class="ename">Go Observability Stack</div>
+        <div class="ebody">
+          <p>Teams add metrics and tracing late, after incidents prove that logs alone are insufficient. The hard part isn't adding one library call — it's a coherent telemetry path: RED metrics, trace emission, scrape config, and split health probes all lined up from day one.</p>
+          <div class="edecs">
+            <div class="edi"><span class="edi-arr">→</span><span class="edi-t">Telemetry wrapped in an injectable <code>Observability</code> component — handlers stay focused on request behavior, not instrumentation wiring.</span></div>
+            <div class="edi"><span class="edi-arr">→</span><span class="edi-t">Separate <code>/healthz</code> (process alive) and <code>/readyz</code> (dependencies configured) — a real liveness/readiness distinction that Kubernetes and load balancers can act on differently.</span></div>
+            <div class="edi"><span class="edi-arr">→</span><span class="edi-t">Prometheus scrape config committed alongside the service — scrape targets stay versioned with the code they observe. OTel spans emit to stdout locally for zero-dependency trace inspection.</span></div>
+          </div>
+        </div>
+        <div class="efoot"><span class="ct">Go 1.25</span><span class="ct">prometheus/client_golang v1.23.2</span><span class="ct">OTel v1.38.0</span><span class="ct">zerolog 1.34</span><span class="ct">Prometheus v2.55.1</span></div>
+      </article>
+
+    </div>
+  </div>
+</section>
+
+<!-- LEDGER -->
+<section id="ledger">
+  <div class="w">
+    <div class="slbl">Technical Ledger</div>
+    <div class="tw rv">
+      <table>
+        <thead><tr><th>Service</th><th>Language</th><th>Storage</th><th>Key Pattern</th><th>Port</th><th>Repo</th></tr></thead>
+        <tbody>
+          <tr><td>Mahall E-Commerce</td><td>Go 1.24</td><td>PostgreSQL / Redis / R2</td><td>Async order orchestration, double-entry payout ledger</td><td>—</td><td><a href="https://github.com/med2004x/mahall-case-study" class="tl" target="_blank">↗</a></td></tr>
+          <tr><td>Lead Source Platform</td><td>Python 3.12</td><td>PostgreSQL / Redis / SQLite</td><td>3-plane architecture, ADR-documented boundaries</td><td>—</td><td><a href="https://github.com/med2004x/lead-source-architecture-case-study" class="tl" target="_blank">↗</a></td></tr>
+          <tr><td>Transactional Outbox</td><td>Go 1.24</td><td>SQLite</td><td>Atomic order + event transaction, delivery ledger, DLQ</td><td>8093</td><td><a href="https://github.com/med2004x/transactional-outbox" class="tl" target="_blank">↗</a></td></tr>
+          <tr><td>Custom Domain Engine</td><td>Go 1.25</td><td>In-Memory (demo)</td><td>DNS provider interface, stateful poller, /readyz distinction</td><td>8090</td><td><a href="https://github.com/med2004x/custom-domain-automation" class="tl" target="_blank">↗</a></td></tr>
+          <tr><td>Multitenant Engine</td><td>Python 3.12</td><td>PostgreSQL 16</td><td>Schema-per-tenant, FOR UPDATE SKIP LOCKED bootstrap</td><td>8094</td><td><a href="https://github.com/med2004x/multitenant-engine" class="tl" target="_blank">↗</a></td></tr>
+          <tr><td>Background Task Processor</td><td>Python 3.12</td><td>Redis 7</td><td>Hash+list+ZSET primitives, registry-driven handlers, DLQ list</td><td>8095</td><td><a href="https://github.com/med2004x/background-task-processor" class="tl" target="_blank">↗</a></td></tr>
+          <tr><td>Full-Text Search</td><td>Go 1.24</td><td>Persisted Inverted Index</td><td>Sync write ACK, bounded channel backpressure, /stats</td><td>8091</td><td><a href="https://github.com/med2004x/go-fulltext-search" class="tl" target="_blank">↗</a></td></tr>
+          <tr><td>Kafka Event Pipeline</td><td>Python 3.12</td><td>Kafka / Embedded</td><td>Envelope-encoded backoff, 4-topic state machine, config transport</td><td>8081</td><td><a href="https://github.com/med2004x/kafka-event-pipeline" class="tl" target="_blank">↗</a></td></tr>
+          <tr><td>API Gateway</td><td>Go 1.25</td><td>YAML config + in-memory</td><td>YAML routes, per-route+caller rate limit, active health probes</td><td>8088</td><td><a href="https://github.com/med2004x/multisurface-api-gateway" class="tl" target="_blank">↗</a></td></tr>
+          <tr><td>Observability Stack</td><td>Go 1.25</td><td>Prometheus TSDB</td><td>Injectable telemetry, RED metrics, split /healthz + /readyz</td><td>8096</td><td><a href="https://github.com/med2004x/observability-stack" class="tl" target="_blank">↗</a></td></tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+</section>
+
+<!-- PHILOSOPHY -->
+<section id="philosophy">
+  <div class="w">
+    <div class="slbl">Engineering Philosophy</div>
+    <div class="phi-g rv">
+      <div class="pi">
+        <div class="pn">01</div>
+        <div class="pt">Simple over clever</div>
+        <div class="pp">Abstractions cost debugging time. When a service fails at 2am, readability matters more than cleverness. I add layers when the problem requires it — not as a default.</div>
+      </div>
+      <div class="pi">
+        <div class="pn">02</div>
+        <div class="pt">Cost is part of the spec</div>
+        <div class="pp">I run my own infrastructure. Every design decision has a hosting cost attached. I treat that as a constraint from day one — not an optimization for later.</div>
+      </div>
+      <div class="pi">
+        <div class="pn">03</div>
+        <div class="pt">Observability first</div>
+        <div class="pp">Logs alone aren't enough. Structured logs, RED metrics, and split liveness/readiness probes get built in first. Retrofitting telemetry after an incident is avoidable.</div>
+      </div>
+      <div class="pi">
+        <div class="pn">04</div>
+        <div class="pt">Full ownership</div>
+        <div class="pp">I take projects from schema design through deployment and incident response. No handoffs to a separate ops layer, no "that's DevOps's problem."</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- CONTACT -->
+<section id="contact">
+  <div class="w">
+    <div class="slbl">Contact</div>
+    <div class="ct-in">
+      <div>
+        <p class="ct-lead rv">Open to backend contracts.</p>
+        <p class="ct-sub rv">I work best with async teams, clear specs, and founders who know what they need. Go and Python are my primary tools.</p>
+      </div>
+      <div class="ct-links rv">
+        <div class="cm">
+          <span class="cml">Email</span>
+          <a class="cmv mono" href="mailto:mohamedelhammi99@gmail.com">mohamedelhammi99@gmail.com</a>
+        </div>
+        <div class="cm">
+          <span class="cml">GitHub</span>
+          <a class="cmv" href="https://github.com/med2004x" target="_blank" rel="noopener">github.com/med2004x</a>
+        </div>
+        <div class="cm">
+          <span class="cml">LinkedIn</span>
+          <a class="cmv" href="https://www.linkedin.com/in/mohamed-elhammi-98748528b/" target="_blank" rel="noopener">linkedin.com/in/mohamed-elhammi</a>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<footer>
+  <div class="fi">
+    <span class="fl">Mohamed Elhammi · med2004x</span>
+    <span class="fl">© 2026</span>
+  </div>
+</footer>
+
+<script>
+/* HERO CANVAS */
+(function(){
+  const cv=document.getElementById('hc');
+  if(!cv)return;
+  const cx=cv.getContext('2d');
+  const C={cy:'#22d3ee',am:'#fbbf24',vi:'#a78bfa',em:'#34d399',sl:'#94a3b8',or:'#fb923c'};
+  const nodes=[
+    {l:'API Gateway',t:'cy',rx:.14,ry:.32},
+    {l:'Redis',t:'am',rx:.35,ry:.22},
+    {l:'Kafka',t:'am',rx:.58,ry:.18},
+    {l:'Worker Pool',t:'vi',rx:.52,ry:.52},
+    {l:'PostgreSQL',t:'em',rx:.78,ry:.46},
+    {l:'CDN Edge',t:'sl',rx:.22,ry:.64},
+    {l:'Outbox Relay',t:'cy',rx:.72,ry:.28},
+    {l:'Observability',t:'or',rx:.38,ry:.72},
+  ];
+  const edges=[
+    {f:0,t:1,c:'am'},{f:0,t:5,c:'sl'},{f:1,t:3,c:'vi'},
+    {f:2,t:6,c:'cy'},{f:3,t:4,c:'em'},{f:6,t:4,c:'em'},
+    {f:3,t:7,c:'or'},{f:0,t:4,c:'em'},{f:1,t:2,c:'am'},
+  ];
+  const drifts=nodes.map(()=>({vx:(Math.random()-.5)*.00012,vy:(Math.random()-.5)*.00012,ox:0,oy:0}));
+  const packets=[];
+  edges.forEach((e,i)=>{
+    const n=1+Math.floor(Math.random()*2);
+    for(let j=0;j<n;j++) packets.push({ei:i,t:Math.random(),spd:.0025+Math.random()*.0035});
+  });
+  function resize(){cv.width=cv.offsetWidth;cv.height=cv.offsetHeight;}
+  function pos(n,i){return{x:n.rx*cv.width+drifts[i].ox*cv.width,y:n.ry*cv.height+drifts[i].oy*cv.height};}
+  let f=0;
+  function draw(){
+    f++;
+    cx.clearRect(0,0,cv.width,cv.height);
+    drifts.forEach(d=>{
+      d.ox+=d.vx;d.oy+=d.vy;
+      if(Math.abs(d.ox)>.022)d.vx*=-1;
+      if(Math.abs(d.oy)>.022)d.vy*=-1;
+    });
+    edges.forEach(e=>{
+      const fp=pos(nodes[e.f],e.f),tp=pos(nodes[e.t],e.t);
+      cx.beginPath();cx.moveTo(fp.x,fp.y);cx.lineTo(tp.x,tp.y);
+      cx.strokeStyle=(C[e.c]||'#888')+'1e';cx.lineWidth=1.1;cx.stroke();
+    });
+    packets.forEach(p=>{
+      p.t+=p.spd;if(p.t>1)p.t-=1;
+      const e=edges[p.ei];
+      const fp=pos(nodes[e.f],e.f),tp=pos(nodes[e.t],e.t);
+      const x=fp.x+(tp.x-fp.x)*p.t,y=fp.y+(tp.y-fp.y)*p.t;
+      const col=C[e.c]||'#fff';
+      cx.beginPath();cx.arc(x,y,2.6,0,Math.PI*2);
+      cx.fillStyle=col;cx.shadowBlur=7;cx.shadowColor=col;cx.fill();cx.shadowBlur=0;
+    });
+    nodes.forEach((nd,i)=>{
+      const p=pos(nd,i);
+      const col=C[nd.t]||'#888';
+      const pulse=.65+.35*Math.sin(f*.02+i*.9);
+      const a=Math.round(pulse*75).toString(16).padStart(2,'0');
+      cx.beginPath();cx.arc(p.x,p.y,18,0,Math.PI*2);cx.fillStyle=col+'08';cx.fill();
+      cx.beginPath();cx.arc(p.x,p.y,11,0,Math.PI*2);cx.strokeStyle=col+a;cx.lineWidth=1.3;cx.stroke();
+      cx.beginPath();cx.arc(p.x,p.y,5,0,Math.PI*2);
+      cx.fillStyle=col;cx.shadowBlur=12;cx.shadowColor=col;cx.fill();cx.shadowBlur=0;
+      cx.fillStyle=col+'aa';cx.font='500 10px JetBrains Mono,monospace';
+      cx.textAlign='center';cx.fillText(nd.l,p.x,p.y+24);
+    });
+    requestAnimationFrame(draw);
+  }
+  resize();window.addEventListener('resize',resize);draw();
+})();
+
+/* SCROLL REVEAL */
+(function(){
+  const obs=new IntersectionObserver(entries=>{
+    entries.forEach(e=>{if(e.isIntersecting){e.target.classList.add('in');obs.unobserve(e.target);}});
+  },{threshold:.08});
+  document.querySelectorAll('.rv').forEach(el=>obs.observe(el));
+})();
+</script>
 </body>
 </html>
